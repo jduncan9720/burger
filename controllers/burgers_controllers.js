@@ -8,11 +8,11 @@ var burger = require("../models/burger.js");
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
   burger.selectAll(function(data) {
-    var hbsObject = {
+    var handlebarsData = {
       burgers: data
     };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
+    console.log(handlebarsData);
+    res.render("index", handlebarsData);
   });
 });
 
