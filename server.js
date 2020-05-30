@@ -1,15 +1,30 @@
 var express = require("express");
-var orm = require("./config/orm.js");
 
+var PORT = process.env.PORT || 8080;
 
-orm.selectAll("burgers");
+var app = express();
 
-orm.insertOne("example");
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
 
-orm.updateOne("1", "devoured")
+// Parse application body
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Find a pet in the pets table by an animal_name of Rachel.
-// orm.selectWhere("pets", "animal_name", "Rachel");
+// Set Handlebars.
+var exphbs = require("express-handlebars");
 
-// // Find the buyer with the most pets.
-// orm.findWhoHasMost("buyer_name", "buyer_id", "buyers", "pets");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgers_controllers.js");
+
+app.use(routes);
+
+// Start our server so that it can begin listening to client requests.
+app.listen(PORT, function() {
+  // Log (server-side) when our server has started
+  console.log("Server listening on: http://localhost:" + PORT);
+});
+
