@@ -65,11 +65,11 @@ var orm = {
     });
   },
   // An example of objColVals would be {name: panther, sleepy: true}
-  updateOne: function (table, objColVals, condition, cb) {
+  updateOne: function (table, handlebarsData, condition, cb) {
     var queryString = "UPDATE " + table;
 
     queryString += " SET ";
-    queryString += objToSql(objColVals);
+    queryString += objToSql(handlebarsData);
     queryString += " WHERE ";
     queryString += condition;
 
@@ -82,19 +82,6 @@ var orm = {
       cb(result);
     });
   },
-  deleteOne: function (table, condition, cb) {
-    var queryString = "DELETE FROM " + table;
-    queryString += " WHERE ";
-    queryString += condition;
-    
-    connection.query(queryString, function (err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-  }
 };
 
 // Export the orm object for the model (cat.js).

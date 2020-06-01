@@ -6,7 +6,7 @@ $(function() {
 
     var newBurger = {
       burger_name: $("#bu").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
+      devoured: 0
     };
 
     // Send the POST request.
@@ -15,14 +15,14 @@ $(function() {
       data: newBurger
     }).then(
       function() {
-        console.log("created new burger");
+        console.log("Added new burger");
         // Reload the page to get the updated list
         location.reload();
       }
     );
   });
 
-  $("#changeDevour").on("click", function(event) {
+  $(".eatburger").on("click", function(event) {
     var id = $(this).data("id");
     
     var newDevourState = {
