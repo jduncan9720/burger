@@ -22,7 +22,9 @@
         <ul>
           {{#each burgers}}
           {{#if devoured}}
-          <span>{{this.burger_name}}</span>
+          <span><strong> {{this.id}} - {{this.burger_name}} </strong></span>
+          <button type="button" class="makeburger btn btn-primary" id="makebutton" data-id="{{this.id}}"
+          data-newDevoured="{{devour}}">Order!</span></button>
           <hr>
           {{/if}}
           {{/each}}
